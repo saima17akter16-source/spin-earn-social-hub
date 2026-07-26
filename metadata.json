@@ -1,0 +1,6 @@
+{
+  "name": "Spin & Earn Social Hub",
+  "description": "Reward-based platform to spin wheel, watch ads, earn points, promote social media tasks, and manage bKash/Nagad wallet deposits and withdrawals.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

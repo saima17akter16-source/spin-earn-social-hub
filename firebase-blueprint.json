@@ -1,0 +1,181 @@
+{
+  "entities": {
+    "users": {
+      "title": "Users",
+      "description": "User profiles and daily limits",
+      "properties": {
+        "uid": { "type": "string", "description": "User Auth UID" },
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "Display Name" },
+        "username": { "type": "string", "description": "Unique Username" },
+        "photoURL": { "type": "string", "description": "Profile picture URL" },
+        "points": { "type": "number", "description": "Current points balance" },
+        "walletBalance": { "type": "number", "description": "Current Taka wallet balance" },
+        "role": { "type": "string", "description": "User role: 'user' or 'admin'" },
+        "isBlocked": { "type": "boolean", "description": "Whether user is suspended" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Registration timestamp" },
+        "dailySpinsCount": { "type": "number", "description": "Spins completed today" },
+        "dailyAdsCount": { "type": "number", "description": "Ads watched today" },
+        "lastSpinResetDate": { "type": "string", "description": "Last spin reset date (YYYY-MM-DD)" },
+        "lastAdResetDate": { "type": "string", "description": "Last ad reset date (YYYY-MM-DD)" },
+        "phoneNumber": { "type": "string", "description": "Contact phone number" }
+      },
+      "required": ["uid", "email", "points"]
+    },
+    "wallet": {
+      "title": "Wallet",
+      "description": "User financial totals",
+      "properties": {
+        "uid": { "type": "string", "description": "User UID" },
+        "totalPoints": { "type": "number", "description": "Lifetime total points earned" },
+        "totalEarningsTaka": { "type": "number", "description": "Lifetime earnings in BDT" },
+        "totalWithdrawnTaka": { "type": "number", "description": "Lifetime withdrawn in BDT" },
+        "totalDepositedTaka": { "type": "number", "description": "Lifetime deposited in BDT" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid"]
+    },
+    "withdraw": {
+      "title": "Withdraw Requests",
+      "description": "Withdrawal payout requests",
+      "properties": {
+        "id": { "type": "string" },
+        "uid": { "type": "string" },
+        "userDisplayName": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "fullName": { "type": "string" },
+        "mobileNumber": { "type": "string" },
+        "pointsDeducted": { "type": "number" },
+        "amountTaka": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "accountType": { "type": "string" },
+        "status": { "type": "string" },
+        "adminNote": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "amountTaka", "paymentMethod", "mobileNumber", "status"]
+    },
+    "deposit": {
+      "title": "Deposit Requests",
+      "description": "Deposit submit requests",
+      "properties": {
+        "id": { "type": "string" },
+        "uid": { "type": "string" },
+        "userDisplayName": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "amountTaka": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "senderMobile": { "type": "string" },
+        "transactionId": { "type": "string" },
+        "screenshotUrl": { "type": "string" },
+        "status": { "type": "string" },
+        "adminNote": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "amountTaka", "transactionId", "status"]
+    },
+    "rewardHistory": {
+      "title": "Reward History",
+      "description": "Log of earned rewards",
+      "properties": {
+        "id": { "type": "string" },
+        "uid": { "type": "string" },
+        "type": { "type": "string" },
+        "pointsEarned": { "type": "number" },
+        "description": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "type", "pointsEarned"]
+    },
+    "adsHistory": {
+      "title": "Ads History",
+      "description": "Log of watched video ads",
+      "properties": {
+        "id": { "type": "string" },
+        "uid": { "type": "string" },
+        "adTitle": { "type": "string" },
+        "pointsEarned": { "type": "number" },
+        "durationSeconds": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "adTitle", "pointsEarned"]
+    },
+    "transactions": {
+      "title": "Transactions",
+      "description": "All financial & points ledger transactions",
+      "properties": {
+        "id": { "type": "string" },
+        "uid": { "type": "string" },
+        "type": { "type": "string" },
+        "amount": { "type": "number" },
+        "currency": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "type", "amount", "currency"]
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "User and system notifications",
+      "properties": {
+        "id": { "type": "string" },
+        "uid": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "isRead": { "type": "boolean" },
+        "type": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "message"]
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Global application configuration",
+      "properties": {
+        "pointRate": { "type": "number", "description": "Points per 1 Taka (e.g. 200 = 10000 points per 50 Taka)" },
+        "minWithdrawPoints": { "type": "number" },
+        "pointsPerSpin": { "type": "number" },
+        "pointsPerAd": { "type": "number" },
+        "dailySpinLimit": { "type": "number" },
+        "dailyAdLimit": { "type": "number" },
+        "dailyRewardPoints": { "type": "number" },
+        "adsEnabled": { "type": "boolean" },
+        "maintenanceMode": { "type": "boolean" },
+        "websiteNotice": { "type": "string" },
+        "bkashNumber": { "type": "string" },
+        "nagadNumber": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "socialTasks": {
+      "title": "Social Tasks",
+      "description": "Promotional tasks for users to earn extra points",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "platform": { "type": "string" },
+        "rewardPoints": { "type": "number" },
+        "link": { "type": "string" },
+        "totalRequired": { "type": "number" },
+        "totalCompleted": { "type": "number" },
+        "createdByUid": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "announcements": {
+      "title": "Announcements",
+      "description": "Site announcements and updates",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "type": { "type": "string" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}
